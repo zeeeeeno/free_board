@@ -11,7 +11,7 @@
 
 <body>
     <div id="header">
-        <h1>자유 게시판</h1>
+        <h1 onclick="location.href = './board_list.html'">자유 게시판</h1>
     </div>
     <div id="container">
         <div class="detail_board" id="detail_board"></div>
@@ -41,6 +41,9 @@
     const detailBoardTable = document.querySelector('#detail_board');
     const detailBoardContents = document.querySelector('#detail_contents_info');
 
+    /* 
+        게시글 상세내용 출력
+    */
     function loadBoardDetail() {
         const lists = JSON.parse(localStorage.getItem(BOARD));
         const idx = boardIndex;
@@ -141,6 +144,9 @@
         detailBoardContents.appendChild(contentsContent);
     }
 
+    /* 
+        게시글 수정 화면 전환
+    */
     function modify() {
         let contentsInput = $('.contents__input').attr('disabled', false);
         contentsInput = $('.contents__input').css('border', 'solid 5px #FFE4B5');
@@ -152,6 +158,9 @@
         btnArea_upd = $('#update_btn_area').css('margin', '0px auto');
     }
 
+    /* 
+        게시글 수정
+    */
     function update() {
         const BOARD = 'board';
         const clickBoardNum = 'clickBoardNum';
@@ -170,6 +179,9 @@
         window.location.replace("./board_detail.html");
     }
 
+    /* 
+        게시글 삭제
+    */
     function remove() {
         console.log('board delete()')
 
@@ -192,6 +204,9 @@
         window.location.replace("./board_list.html");
     }
 
+    /* 
+        게시글 수정 취소
+     */
     function cancel() {
         let contentsInput = $('.contents__input').attr('disabled', true);
         contentsInput = $('.contents__input').css('border', 'none');
@@ -199,8 +214,6 @@
         let btnArea_updDel = $('#update_delete_btn').css('display', 'block');
 
         let btnArea_upd = $('#update_btn_area').css('display', 'none');
-        // btnArea_upd = $('#update_btn_area').css('width', '16%');
-        // btnArea_upd = $('#update_btn_area').css('margin', '0px auto');
     }
 
     window.onload = function () {

@@ -11,12 +11,13 @@
 
 <body>
     <div id="header">
-        <h1>자유게시판</h1>
+        <h1 onclick="location.href = './board_list.html'">자유 게시판</h1>
     </div>
     <div id="container">
         <div>
             <h3>글 작성</h3>
         </div>
+        <hr>
         <div id="contents">
             <form>
                 <div id="contents_header">
@@ -52,7 +53,9 @@
     let date = new Date();
     let views = 0;
 
-    // Attach an event for when the user submits the form
+    /* 
+        게시글 작성
+    */
     $('form').on('submit', function (event) {
 
         // Prevent the page from reloading
@@ -95,13 +98,15 @@
         }
     });
 
-    // list index 정하기
+    /* 
+        list index 정하기
+    */
     function assignIndex() {
         const lists = JSON.parse(localStorage.getItem(BOARD));
         if (!lists) {
             nums = 1;
         } else {
-            nums = parseInt(lists[lists.length - 1].num);
+            nums = parseInt(lists[lists.length - 1].num)+1;
         }
     }
 

@@ -11,7 +11,7 @@
 
 <body>
     <div id="header">
-        <h1>자유 게시판</h1>
+        <h1 onclick="location.href = './board_list.html'">자유 게시판</h1>
     </div>
     <div id="container">
         <div>
@@ -87,19 +87,21 @@
         if (!lists || lists.length == 0) {
             assignIndex();
 
-            // const tr = document.createElement('tr');
-            // tr.classList.add('board__content');
+            /*
+            const tr = document.createElement('tr');
+            tr.classList.add('board__content');
 
-            // const tdNum = document.createElement('td');
-            // tdNum.classList.add('board__content-column');
-            // tdNum.colSpan = 6;
-            // tdNum.style.textAlign = "center";
-            // tdNum.style.height = "40px";
-            // tdNum.textContent = "게시글이 없습니다.";
+            const tdNum = document.createElement('td');
+            tdNum.classList.add('board__content-column');
+            tdNum.colSpan = 6;
+            tdNum.style.textAlign = "center";
+            tdNum.style.height = "40px";
+            tdNum.textContent = "게시글이 없습니다.";
 
-            // tr.appendChild(tdNum);
+            tr.appendChild(tdNum);
 
-            // boardTableBody.appendChild(tr);
+            boardTableBody.appendChild(tr);
+            */
         }
     }
 
@@ -109,11 +111,18 @@
     */
     function showBoardLists() {
         const lists = JSON.parse(localStorage.getItem(BOARD));
-
         const listsSize = lists.length;
         const listCnt = $('#totalCntBoard').text(listsSize);
+        let nums = 1;
+        let date = new Date();
+        let views = 0;
 
+        // 배열 역순 정렬
         lists.reverse();
+
+        /* 
+            게시글 리스트 출력, 페이지네이션
+        */
         lists.forEach((list, index) => {
             if (index < 5) {
                 const tr = document.createElement('tr');
@@ -172,6 +181,7 @@
 
                     const spanIndexText = document.createElement('span');
                     spanIndexText.classList.add('board__index');
+                    spanIndexText.id = `board__index${i+1}`;
                     spanIndexText.textContent = i + 1;
 
                     aIndex.appendChild(spanIndexText);
@@ -186,12 +196,20 @@
     }
 
     /* 
-        페이지 네이션
+        추가 게시글 리스트 출력
     */
     function showBoardListsNewPage(pageIndex) {
         boardTableBody.textContent = '';
         const lists = JSON.parse(localStorage.getItem(BOARD));
         const limitPage = pageIndex * 5;
+
+        const indexList =  $('.board__index');
+        for(let idx = 0; idx<indexList.length; idx++) {
+            let index = $(`#board__index${idx+1}`).css('color', 'black');
+        }
+
+        let index = $(`#board__index${pageIndex+1}`).css('color', 'red');
+
 
         lists.reverse();
 
@@ -245,10 +263,9 @@
         });
     }
 
-    let nums = 1;
-    let date = new Date();
-    let views = 0;
-
+    /* 
+        인덱스 배정
+    */
     function assignIndex() {
         const lists = JSON.parse(localStorage.getItem(BOARD));
         if (!lists) {

@@ -5,7 +5,8 @@ body{
 #header {
     width: 100%;
     line-height: 100px;
-    border-bottom: 10px solid rgba(0, 153, 153, 1);
+    border-bottom: 5px solid rgba(0, 153, 153, 1);
+    color: rgb(120, 120, 120);
     text-align: center;
     vertical-align: middle;
 }
@@ -18,6 +19,7 @@ body{
     border: 1px solid gray;
     border-radius: 3vh;
     padding: 10px 40px 30px 40px;
+    margin: 30px 0px 0px 0px;
 }
 
 #contents_header {
@@ -26,6 +28,11 @@ body{
 
 h1 {
     margin: 0px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
 }
 
 p {
@@ -38,12 +45,12 @@ p {
 }
 
 .content {
-    margin: 20px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
     width: 100%;
 }
 
 .content_header {
-    margin: 30px 100px 30px 0px;
+    margin: 20px 100px 30px 0px;
     display: inline-block;
     width: 40%;
 }
@@ -64,7 +71,7 @@ input[type=submit]  {
     padding: 5px;
     height: 40px;
     border: 0px;
-    background-color: gray;
+    background-color: rgb(0, 153, 153);
     color: white;
     font-weight: bold;
     border-radius: 3vh;
@@ -76,7 +83,7 @@ input[type=button]  {
     padding: 5px;
     height: 40px;
     border: 0px;
-    background-color: gray;
+    background-color: rgb(51, 102, 204);
     color: white;
     font-weight: bold;
     border-radius: 3vh;
@@ -124,12 +131,12 @@ input[type=button]  {
 }
 
 #thead_area {
-    background-color: rgb(172, 166, 166);
+    background-color: rgba(51, 102, 204, 0.5);
     border-bottom: 2px solid rgb(110, 110, 110);
 }
 
 tr {
-    height: 30px;
+    height: 50px;
 }
 
 #bottom_area {
@@ -171,10 +178,10 @@ tr {
     border-radius: 4vh;
   }
     
-.button1 {background-color: #4CAF50;} /* Green */
-.button2 {background-color: #008CBA;} /* Blue */
+.button1 {background-color: rgb(153, 204, 0);} 
+.button2 {background-color: rgb(51, 102, 204);}
 .button3 {
-    background-color: #98ba00;
+    background-color: rgb(204, 102, 0);
     border-radius: 10vh;
 }
 
