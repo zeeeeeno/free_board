@@ -32,7 +32,7 @@
                 </div>
                 <div class="content">
                     <p>내용</p>
-                    <input type="textarea" id="board_contents" placeholder="내용을 입력하세요.">
+                    <textarea type="textarea" id="board_contents" placeholder="내용을 입력하세요."></textarea>
                 </div>
                 <div id="btn-content">
                     <div id="btn_area">
@@ -48,19 +48,17 @@
 </body>
 <script>
     const BOARD = 'board';
-
     let nums = 1;
-    let date = new Date();
-    let views = 0;
 
     /* 
         게시글 작성
     */
     $('form').on('submit', function (event) {
-
         // Prevent the page from reloading
         event.preventDefault();
 
+        let date = new Date();
+        let views = 0;
         let title = $("#board_title").val();
         let author = $("#board_author").val();
         let content = $("#board_contents").val();
@@ -106,7 +104,7 @@
         if (!lists) {
             nums = 1;
         } else {
-            nums = parseInt(lists[lists.length - 1].num)+1;
+            nums = parseInt(lists[lists.length - 1].num) + 1;
         }
     }
 

@@ -130,9 +130,8 @@
         const contentsContent = document.createElement('div');
         contentsContent.classList.add('contents__content');
 
-        const contentsInput = document.createElement('input');
+        const contentsInput = document.createElement('textarea');
         contentsInput.classList.add('contents__input');
-        contentsInput.type = 'textarea'
         contentsInput.value = lists[idx].content;
         contentsInput.style.border = 'none';
         contentsInput.style.height = '96%';
@@ -183,25 +182,27 @@
         게시글 삭제
     */
     function remove() {
-        console.log('board delete()')
+        if (confirm("정말 삭제하시겠습니까??") == true) {    
+            let lists = JSON.parse(localStorage.getItem(BOARD));
+            const idxDelete = boardIndex;
 
-        let lists = JSON.parse(localStorage.getItem(BOARD));
-        const idxDelete = boardIndex;
+            console.log(delete lists[idxDelete]);
 
-        console.log(delete lists[idxDelete]);
+            let newLists = [];
 
-        let newLists = [];
+            lists.forEach(element => {
+                console.log(element)
+                if (element != null) {
+                    newLists.push(element);
+                }
+            });
 
-        lists.forEach(element => {
-            console.log(element)
-            if (element != null) {
-                newLists.push(element);
-            }
-        });
+            localStorage.setItem(BOARD, JSON.stringify(newLists));
 
-        localStorage.setItem(BOARD, JSON.stringify(newLists));
-
-        window.location.replace("./board_list.html");
+            window.location.replace("./board_list.html");
+        } else {
+            return false;
+        }
     }
 
     /* 
@@ -212,7 +213,6 @@
         contentsInput = $('.contents__input').css('border', 'none');
 
         let btnArea_updDel = $('#update_delete_btn').css('display', 'block');
-
         let btnArea_upd = $('#update_btn_area').css('display', 'none');
     }
 

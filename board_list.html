@@ -58,18 +58,13 @@
         let lists = JSON.parse(localStorage.getItem(BOARD));
         const index = e.target.id.replace(/[a-z|-]/gi, '');
 
-        console.log('index: ' + index);
-
-        contentsNum = index;
-        var clickBoardNum = "clickBoardNum"
-
         for (let cnt = 0; cnt < lists.length; cnt++) {
-            if (lists[cnt].num === contentsNum) {
+            if (lists[cnt].num === index) {
                 var legacyIdx = Number(lists[cnt].views);
                 var chIdx = legacyIdx + 1;
 
                 lists[cnt].views = chIdx;
-                localStorage.setItem(clickBoardNum, cnt);
+                localStorage.setItem("clickBoardNum", cnt);
             }
         }
 
@@ -85,9 +80,11 @@
         const lists = JSON.parse(localStorage.getItem(BOARD));
 
         if (!lists || lists.length == 0) {
-            assignIndex();
 
-            /*
+            // test를 위해서 임시 데이터 삽입
+            initList();
+
+            /* 
             const tr = document.createElement('tr');
             tr.classList.add('board__content');
 
@@ -131,11 +128,12 @@
                 const tdNum = document.createElement('td');
                 tdNum.classList.add('board__content-column');
                 tdNum.textContent = list.num;
-
+                tdNum.style.width = '10%';
 
                 const tdTitle = document.createElement('td');
                 tdTitle.classList.add('board__content-column');
                 tdTitle.style.textAlign = 'left';
+                tdTitle.style.width = '50%';
 
                 const aTitle = document.createElement('a');
                 aTitle.textContent = list.title;
@@ -147,14 +145,17 @@
                 const tdAuthor = document.createElement('td');
                 tdAuthor.classList.add('board__content-column');
                 tdAuthor.textContent = list.author;
+                tdAuthor.style.width = '15%';
 
                 const tdDate = document.createElement('td');
                 tdDate.classList.add('board__content-column');
                 tdDate.textContent = list.date;
+                tdDate.style.width = '15%';
 
                 const tdViews = document.createElement('td');
                 tdViews.classList.add('board__content-column');
                 tdViews.textContent = list.views;
+                tdViews.style.width = '10%';
 
                 tr.appendChild(tdNum);
                 tr.appendChild(tdTitle);
@@ -176,13 +177,14 @@
                     const indexContainer = document.querySelector('#index-container');
 
                     const aIndex = document.createElement('a');
-                    aIndex.href = '#';
+                    // aIndex.href = '#';
                     aIndex.classList.add('board__index-link');
 
                     const spanIndexText = document.createElement('span');
                     spanIndexText.classList.add('board__index');
-                    spanIndexText.id = `board__index${i+1}`;
+                    spanIndexText.id = `board__index${i + 1}`;
                     spanIndexText.textContent = i + 1;
+                    let index = $('#board__index1').css('color', 'red');
 
                     aIndex.appendChild(spanIndexText);
                     indexContainer.appendChild(aIndex);
@@ -202,17 +204,16 @@
         boardTableBody.textContent = '';
         const lists = JSON.parse(localStorage.getItem(BOARD));
         const limitPage = pageIndex * 5;
+        const indexList = $('.board__index');
 
-        const indexList =  $('.board__index');
-        for(let idx = 0; idx<indexList.length; idx++) {
-            let index = $(`#board__index${idx+1}`).css('color', 'black');
+        for (let idx = 0; idx < indexList.length; idx++) {
+            let index = $(`#board__index${idx + 1}`).css('color', 'black');
         }
 
-        let index = $(`#board__index${pageIndex+1}`).css('color', 'red');
+        let index = $(`#board__index${pageIndex + 1}`).css('color', 'red');
 
 
         lists.reverse();
-
         lists.forEach((list, index) => {
             if (index >= limitPage && index < limitPage + 5) {
                 const tr = document.createElement('tr');
@@ -223,29 +224,34 @@
                 const tdNum = document.createElement('td');
                 tdNum.classList.add('board__content-column');
                 tdNum.textContent = list.num;
+                tdNum.style.width = '10%';
 
                 const aTitle = document.createElement('a');
                 aTitle.textContent = list.title;
-                aTitle.href = '#';
+                // aTitle.href = '#';
                 aTitle.id = `link-to-content${list.num}`;
 
                 const tdTitle = document.createElement('td');
                 tdTitle.classList.add('board__content-column');
                 tdTitle.style.textAlign = 'left';
+                tdTitle.style.width = '50%';
 
                 tdTitle.appendChild(aTitle);
 
                 const tdAuthor = document.createElement('td');
                 tdAuthor.classList.add('board__content-column');
                 tdAuthor.textContent = list.author;
+                tdAuthor.style.width = '15%';
 
                 const tdDate = document.createElement('td');
                 tdDate.classList.add('board__content-column');
                 tdDate.textContent = list.date;
+                tdAuthor.style.width = '15%';
 
                 const tdViews = document.createElement('td');
                 tdViews.classList.add('board__content-column');
                 tdViews.textContent = list.views;
+                tdViews.style.width = '10%';
 
                 tr.appendChild(tdNum);
                 tr.appendChild(tdTitle);
@@ -264,28 +270,22 @@
     }
 
     /* 
-        인덱스 배정
+        list 초기화
+        페이지네이션 테스트
     */
-    function assignIndex() {
+    function initList() {
+        let date = new Date();
+        let views = 0;
+        let nums = 0;
+        const objArr = [];
         const lists = JSON.parse(localStorage.getItem(BOARD));
+
         if (!lists) {
             nums = 1;
         } else {
             nums = parseInt(lists[lists.length - 1].num) + 1;
         }
 
-        initList();
-
-    }
-
-    /* 
-        list 초기화
-        페이지네이션 테스트
-    */
-    function initList() {
-        alert('list 초기화');
-
-        const objArr = [];
         let cnt;
         for (cnt = 1; cnt < 20; cnt++) {
             objArr.push({
@@ -296,10 +296,8 @@
                 views: 0,
                 date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
             });
-
             nums++
         }
-
         localStorage.setItem(BOARD, JSON.stringify(objArr));
     }
 
