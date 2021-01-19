@@ -36,6 +36,10 @@ a {
     color: rgb(0, 0, 160);
 }
 
+a:hover {
+    color: rgba(67, 67, 255, 0.658);;
+}
+
 p {
     margin: 0px 0px 10px 0px;
     font-size: small;
