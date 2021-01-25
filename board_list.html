@@ -20,25 +20,23 @@
         <hr>
         <div id="body_area">
             <div id="contents_area">
-                <div id="contents_area">
-                    <div id="contents_top_area">
-                        <p id="total_board"> 전체 게시글: <span id="totalCntBoard"></span></p>
-                    </div>
-                    <div class="board__container" id="div_table_area">
-                        <table class="board__table-head" id="table_area">
-                            <thead class="board__titles" id="thead_area">
-                                <tr class="board__titles">
-                                    <th class="board__column">번호</th>
-                                    <th class="board__column">제목</th>
-                                    <th class="board__column">작성자</th>
-                                    <th class="board__column">작성일</th>
-                                    <th class="board__column">조회</th>
-                                </tr>
-                            </thead>
-                            <tbody class="board__contents" id="board-body"></tbody>
-                        </table>
-                        <div class="board__index-container" id="index-container"></div>
-                    </div>
+                <div id="contents_top_area">
+                    <p id="total_board"> 전체 게시글: <span id="totalCntBoard"></span></p>
+                </div>
+                <div class="board__container" id="div_table_area">
+                    <table class="board__table-head" id="table_area">
+                        <thead class="board__titles" id="thead_area">
+                            <tr class="board__titles">
+                                <th class="board__column">번호</th>
+                                <th class="board__column">제목</th>
+                                <th class="board__column">작성자</th>
+                                <th class="board__column">작성일</th>
+                                <th class="board__column">조회</th>
+                            </tr>
+                        </thead>
+                        <tbody class="board__contents" id="board-body"></tbody>
+                    </table>
+                    <div class="board__index-container" id="index-container"></div>
                 </div>
                 <div id="bottom_area">
                     <a href="./board_write.html" id="create_register">게시글 작성</a>
@@ -110,7 +108,7 @@
         const lists = JSON.parse(localStorage.getItem(BOARD));
         const listsSize = lists.length;
         const listCnt = $('#totalCntBoard').text(listsSize);
-        
+
         let nums = 1;
         let date = new Date();
         let views = 0;
